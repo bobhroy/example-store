@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
     @Value("${payment-gateway:stripe}")
     private String paymentGateway;
-    
+
     //Always use noun (ex. stripe) instead of verbs (ex. getStripePaymentService)
     @Bean
     public PaymentService stripe() {
