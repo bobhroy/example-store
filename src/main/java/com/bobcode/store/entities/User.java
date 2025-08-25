@@ -1,17 +1,19 @@
-package com.bobcode.store;
+package com.bobcode.store.entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
-    private String password;
+    @Column(nullable = false, name = "name")
     private String name;
-
-    public User(Long id, String email, String password, String name) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-    }
+    @Column(nullable = false, name = "email")
+    private String email;
+    @Column(nullable = false, name = "password")
+    private String password;
 
     public Long getId() {
         return id;
@@ -19,6 +21,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -35,13 +45,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
