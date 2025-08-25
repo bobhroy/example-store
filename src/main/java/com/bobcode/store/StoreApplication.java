@@ -16,14 +16,8 @@ public class StoreApplication {
                 .password("password")
                 .email("john@testemail.com")
                 .build();
-        var address = Address.builder()
-                .street("123 Main St")
-                .city("Main St")
-                .state("Main St")
-                .zip("12345")
-                .build();
 
-        user.addAddress(address);
+        user.addTag("tag1");
         System.out.println(user);
 	}
 
