@@ -1,5 +1,6 @@
 package com.bobcode.store;
 
+import com.bobcode.store.entities.Address;
 import com.bobcode.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,15 @@ public class StoreApplication {
                 .password("password")
                 .email("john@testemail.com")
                 .build();
+        var address = Address.builder()
+                .street("123 Main St")
+                .city("Main St")
+                .state("Main St")
+                .zip("12345")
+                .build();
+
+        user.addAddress(address);
+        System.out.println(user);
 	}
 
 }
