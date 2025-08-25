@@ -10,7 +10,11 @@ public class StoreApplication {
 
 	public static void main(String[] args) {
 //        ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
-        var user = new User(1L,"John","john@testmail.com","password");
+        var user = User.builder()
+                .name("John")
+                .password("password")
+                .email("john@testemail.com")
+                .build();
 	}
 
 }
