@@ -1,6 +1,7 @@
 package com.bobcode.store;
 
 import com.bobcode.store.entities.Address;
+import com.bobcode.store.entities.Profile;
 import com.bobcode.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +18,11 @@ public class StoreApplication {
                 .email("john@testemail.com")
                 .build();
 
-        user.addTag("tag1");
+        var profile = Profile.builder()
+                .bio("bio")
+                .build();
+        user.setProfile(profile);
+        profile.setUser(user);
         System.out.println(user);
 	}
 

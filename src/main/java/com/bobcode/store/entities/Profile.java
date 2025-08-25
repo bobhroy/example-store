@@ -1,8 +1,7 @@
 package com.bobcode.store.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -10,6 +9,10 @@ import java.time.LocalDate;
  * Represents a Profile entity in the database.
  * This class maps to the "profiles" table.
  */
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Setter
 @Getter
 @Entity
@@ -33,4 +36,9 @@ public class Profile {
     @Column(name = "loyalty_points")
     private int loyaltyPoints;
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    @MapsId
+    @ToString.Exclude
+    private User user;
 }
