@@ -1,12 +1,13 @@
 package com.bobcode.store.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Setter
 @Getter
+@Setter
 @Entity
 @Table(name = "products")
 public class Product {
@@ -18,10 +19,14 @@ public class Product {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "price")
     private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
 }
