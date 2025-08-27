@@ -1,5 +1,6 @@
 package com.bobcode.store.services;
 
+import com.bobcode.store.entities.Address;
 import com.bobcode.store.entities.User;
 import com.bobcode.store.repositories.AddressRepository;
 import com.bobcode.store.repositories.ProfileRepository;
@@ -46,5 +47,22 @@ public class UserService {
 
     public void fetchAddress() {
         addressRepository.findById(1L).orElseThrow();
+    }
+
+    public void persistRelated(){
+        var user = User.builder()
+                .name("John Doe")
+                .email("johndoe@testmail.com")
+                .password("12345")
+                .build();
+        var address = Address.builder()
+                .street("123 Main St")
+                .city("Main St")
+                .state("state")
+                .zip("12345")
+                .build();
+
+        user.addAddress(address);
+        userRepository.save(user);
     }
 }
