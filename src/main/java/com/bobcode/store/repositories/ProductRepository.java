@@ -1,5 +1,8 @@
 package com.bobcode.store.repositories;
 
+import com.bobcode.store.dtos.ProductSummary;
+import com.bobcode.store.dtos.ProductSummaryDTO;
+import com.bobcode.store.entities.Category;
 import com.bobcode.store.entities.Product;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
@@ -43,7 +46,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findFirst5ByNameLikeOrderByPrice(String name);
 
     // Find Products whose prices are in given range and sort by name
-    // SQL or JPQL
+    // SQL
 //    @Query(value = "select * from products p where p.price between :min and :max order by p.name", nativeQuery = true)
 //    List<Product> findProducts(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
 
@@ -58,4 +61,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Transactional
     @Query("update Product p set p.price = :newPrice where p.category.id = :categoryId")
     void updatePriceByCategory(BigDecimal newPrice, Byte categoryId);
+
+    @Query("select new com.bobcode.store.dtos.ProductSummaryDTO(p.id, p.name) from Product p where p.category = :category")
+    List<ProductSummaryDTO> findByCategory(@Param("category") Category category);
 }

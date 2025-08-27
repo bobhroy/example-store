@@ -1,6 +1,7 @@
 package com.bobcode.store.services;
 
 import com.bobcode.store.entities.Address;
+import com.bobcode.store.entities.Category;
 import com.bobcode.store.entities.User;
 import com.bobcode.store.repositories.*;
 import jakarta.persistence.EntityManager;
@@ -84,5 +85,10 @@ public class UserService {
     @Transactional
     public void updateProductPrices(){
         productRepository.updatePriceByCategory(BigDecimal.valueOf(5), (byte)1);
+    }
+
+    public void fetchProducts(){
+        var products = productRepository.findByCategory(new Category((byte) 1));
+        products.forEach(System.out::println);
     }
 }
