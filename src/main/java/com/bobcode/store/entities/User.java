@@ -77,5 +77,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     @ToString.Exclude
-    private Set<Product> products = new HashSet<>();
+    private Set<Product> wishlist = new HashSet<>();
+
+    public void addToWishlist(Product product) {
+        wishlist.add(product);
+    }
 }

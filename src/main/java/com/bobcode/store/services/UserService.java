@@ -1,16 +1,12 @@
 package com.bobcode.store.services;
 
 import com.bobcode.store.entities.Address;
-import com.bobcode.store.entities.Category;
-import com.bobcode.store.entities.Product;
 import com.bobcode.store.entities.User;
 import com.bobcode.store.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Service
@@ -80,16 +76,10 @@ public class UserService {
 
     @Transactional
     public void manageProducts(){
-        var category = categoryRepository.findById((byte) 1).orElseThrow();
-
-        var product = Product.builder()
-                .name("Product2")
-                .description("desc2")
-                .price(BigDecimal.valueOf(10.99))
-                .category(category)
-                .build();
-
-        productRepository.save(product);
+        var user = userRepository.findById(1L).orElseThrow();
+        var products = productRepository.findAll();
+        products.forEach(user::addToWishlist);
+        userRepository.save(user);
     }
 
 }
