@@ -1,7 +1,6 @@
 package com.bobcode.store.services;
 
 import com.bobcode.store.entities.Address;
-import com.bobcode.store.entities.Category;
 import com.bobcode.store.entities.User;
 import com.bobcode.store.repositories.*;
 import jakarta.persistence.EntityManager;
@@ -100,5 +99,11 @@ public class UserService {
             System.out.println(u);
             u.getAddresses().forEach(System.out::println);
         });
+    }
+
+    @Transactional
+    public void printLoyaltyProfiles(){
+        var users = userRepository.findLoyalUsers(2);
+        users.forEach(u -> System.out.println(u.getId() + ": " + u.getEmail()));
     }
 }
