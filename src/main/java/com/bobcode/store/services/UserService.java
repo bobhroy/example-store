@@ -94,7 +94,10 @@ public class UserService {
 
     @Transactional
     public void fetchUser(){
-        var user = userRepository.findByEmail("johndoe@testmail.com").orElseThrow();
-        System.out.println(user);
+        var users = userRepository.findAll();
+        users.forEach(u -> {
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
     }
 }
