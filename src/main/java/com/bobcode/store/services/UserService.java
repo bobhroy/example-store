@@ -1,11 +1,14 @@
 package com.bobcode.store.services;
 
 import com.bobcode.store.entities.Address;
+import com.bobcode.store.entities.Product;
 import com.bobcode.store.entities.User;
 import com.bobcode.store.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -88,7 +91,17 @@ public class UserService {
 
     @Transactional
     public void fetchProducts(){
-        var products = productRepository.findProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
+        var product = new Product();
+        product.setName("product");
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIncludeNullValues()
+                .withIgnorePaths("id", "description")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        var example = Example.of(product, matcher);
+
+        var products = productRepository.findAll(example);
         products.forEach(System.out::println);
     }
 
