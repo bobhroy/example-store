@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -79,4 +81,8 @@ public class UserService {
         productRepository.deleteById(1L);
     }
 
+    @Transactional
+    public void updateProductPrices(){
+        productRepository.updatePriceByCategory(BigDecimal.valueOf(5), (byte)1);
+    }
 }
